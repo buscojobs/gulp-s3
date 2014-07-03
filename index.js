@@ -6,7 +6,7 @@ var gutil = require('gulp-util');
 var mime = require('mime');
 mime.default_type = 'text/plain';
 
-module.exports = function (aws, options) {
+module.exports = function (aws, options, callback) {
   options = options || {};
 
   if (!options.delay) { options.delay = 0; }
@@ -33,7 +33,6 @@ module.exports = function (aws, options) {
       if (regexGzip.test(file.path)) {
           // Set proper encoding for gzipped files, remove .gz suffix
           headers['Content-Encoding'] = 'gzip';
-          uploadPath = uploadPath.substring(0, uploadPath.length - 3);
       } else if (options.gzippedOnly) {
           // Ignore non-gzipped files
           return file;
@@ -56,6 +55,7 @@ module.exports = function (aws, options) {
           gutil.log(gutil.colors.green('[SUCCESS]', file.path + " -> " + uploadPath));
           res.resume();
         }
+        callback(err);
       });
 
       return file;
