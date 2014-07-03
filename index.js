@@ -15,6 +15,8 @@ module.exports = function (aws, options, callback) {
   var waitTime = 0;
   var regexGzip = /\.([a-z]{2,})\.gz$/i;
   var regexGeneral = /\.([a-z]{2,})$/i;
+  gutil.log("Antes del mapSync");
+  console.log("Antes del mapSync");
 
   return es.mapSync(function (file) {
 
