@@ -19,7 +19,9 @@ module.exports = function (aws, options, callback) {
   return es.mapSync(function (file) {
 
       // Verify this is a file
+      gutil.log("Is Buffer? ", file.isBuffer());
       if (!file.isBuffer()) { return file; }
+      gutil.log("Pasó");
 
       var uploadPath = file.path.replace(file.base, options.uploadPath || '');
       uploadPath = uploadPath.replace(new RegExp('\\\\', 'g'), '/');
