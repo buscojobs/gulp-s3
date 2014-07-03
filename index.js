@@ -55,7 +55,8 @@ module.exports = function (aws, options, callback) {
           gutil.log(gutil.colors.green('[SUCCESS]', file.path + " -> " + uploadPath));
           res.resume();
         }
-        callback(err);
+        if(callback)
+          callback(err);
       });
 
       return file;
